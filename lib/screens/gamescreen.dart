@@ -24,16 +24,72 @@ class _GameScreenState extends State<GameScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff204051),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Container(
           child: Center(
             child: ListView(
               children: <Widget>[
+                
+                Padding(
+                    padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
+                    child: Center(
+                        child: Text("Hangman",
+                            style: TextStyle(
+                                fontSize: 50,
+                                fontFamily: "LemonMilk",
+                                color: Color(0xff84a9ac))))),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                  child: Text('Wrong Guesses: ' + widget.game.wrongGuesses,
+
+                      //Here we are giving the list of wrong guesses a key for use in our integration tests in test_driver/app_test.dart
+                      key: Key('wrong-guesses'),
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontFamily: "DroidSans",
+                          color: Color(0xff84a9ac))),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Center(
+                    child: Text(widget.game.blanksWithCorrectGuesses,
+
+                        //Here we are giving the current progress towards completing the word a key for use in our integration tests in test_driver/app_test.dart
+                        key: Key('word-progress'),
+                        style: TextStyle(
+                            fontSize: 40,
+                            fontFamily: 'DroidSans',
+                            color: Color(0xff84a9ac))),
+                  ),
+                ),
                 Row(
                   children: <Widget>[
+                     Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
+                        child: TextField(
+                          style: TextStyle(
+                              fontFamily: 'DroidSans',
+                              color: Color(0xff84a9ac)),
+                          //Here we are giving the guessing text field a key for use in our integration tests in test_driver/app_test.dart
+                          key: Key('guess-textfield'),
+                          controller: guessTextController,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(
+                                fontFamily: 'DroidSans',
+                                color: Color(0xff84a9ac)),
+                            labelText: 'Enter New Letter',
+                            errorText: alreadyGuessed
+                                ? guessTextFieldErrorMessage
+                                : null,
+                          ),
+                        ),
+                      ),
+                    ),
                     RaisedButton(
-                        color: Colors.red,
+                        color: Color(0xff84a9ac),
 
                         //Here we are giving the guessing button a key for use in our integration tests in test_driver/app_test.dart
                         key: Key('guess-letter-btn'),
@@ -89,67 +145,15 @@ class _GameScreenState extends State<GameScreen> {
                             }
                           });
                         }),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
-                        child: TextField(
-                          style: TextStyle(
-                              fontFamily: 'DroidSans',
-                              color: Color(0xff84a9ac)),
-                          //Here we are giving the guessing text field a key for use in our integration tests in test_driver/app_test.dart
-                          key: Key('guess-textfield'),
-                          controller: guessTextController,
-                          decoration: InputDecoration(
-                            labelStyle: TextStyle(
-                                fontFamily: 'DroidSans',
-                                color: Color(0xff84a9ac)),
-                            labelText: 'Enter New Letter',
-                            errorText: alreadyGuessed
-                                ? guessTextFieldErrorMessage
-                                : null,
-                          ),
-                        ),
-                      ),
-                    ),
+                   
                   ],
-                ),
-                Padding(
-                    padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
-                    child: Center(
-                        child: Text("Hangman",
-                            style: TextStyle(
-                                fontSize: 50,
-                                fontFamily: "LemonMilk",
-                                color: Colors.black)))),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
-                  child: Text('Wrong Guesses: ' + widget.game.wrongGuesses,
-
-                      //Here we are giving the list of wrong guesses a key for use in our integration tests in test_driver/app_test.dart
-                      key: Key('wrong-guesses'),
-                      style: TextStyle(
-                          fontSize: 17,
-                          fontFamily: "DroidSans",
-                          color: Color(0xff84a9ac))),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Center(
-                    child: Text(widget.game.blanksWithCorrectGuesses,
-
-                        //Here we are giving the current progress towards completing the word a key for use in our integration tests in test_driver/app_test.dart
-                        key: Key('word-progress'),
-                        style: TextStyle(
-                            fontSize: 40,
-                            fontFamily: 'DroidSans',
-                            color: Color(0xff84a9ac))),
-                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
+      
     );
   }
 }
