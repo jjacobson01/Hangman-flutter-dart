@@ -4,6 +4,8 @@ import 'package:hangman_game/models/hangmangame.dart';
 import 'gamescreen.dart';
 
 class WinScreen extends StatelessWidget {
+  HangmanGame game;
+  WinScreen(this.game);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,6 +30,15 @@ class WinScreen extends StatelessWidget {
                     child: Image(image: AssetImage('assets/progress_8.png'))),
                 Padding(
                   padding: EdgeInsets.fromLTRB(0, 20, 0, 0),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 13, 0, 13),
+                  child: Text("Score: ${game.score}",
+                      key: Key('Winscore-text'),
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: "DroidSans",
+                          color: Color(0xff84a9ac))),
                 ),
                 RaisedButton(
                     color: Color(0xff84a9ac),

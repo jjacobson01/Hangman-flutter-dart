@@ -4,6 +4,7 @@ class HangmanGame {
   String word;
   String correctGuesses;
   String wrongGuesses;
+  int score = 0;
 
   //Constructor starts off with blank strings that we will concatenate during the course of play
   HangmanGame(this.word) {
@@ -18,21 +19,33 @@ class HangmanGame {
     if (letter == null || letter == "" || !test.hasMatch(letter)) {
       throw ArgumentError();
     }
-
+    //ADD SCORE SYSTEM
     //We want for our guesses to be case insensitive
     letter = letter.toLowerCase();
 
     if (word.contains(letter)) {
+      //return false if not part of alphabet
       if (correctGuesses.contains(letter)) {
         return false;
       }
+      //means letter is correct, add 10 point system
       correctGuesses += letter;
+      for(int i = 0; i < word.length;++i)
+      {
+        if(word[i]==letter)
+        {
+          score += 10;
+        }
+      }
       return true;
     } else {
+      //same as above, checks if part of alphabet
       if (wrongGuesses.contains(letter)) {
         return false;
       }
+      //means letter is not in word, minus 5 point system
       wrongGuesses += letter;
+      score-=5;
       return true;
     }
   }

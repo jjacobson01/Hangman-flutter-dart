@@ -221,4 +221,70 @@ void main() {
       expect(word, 'banana');
     });
   });
+  group("Scoring", () {
+    test('If word is correct, give 10 points', () {
+      //Word to start game and test
+      String word = 'banana';
+
+      final hangmanGame = HangmanGame(word);
+      //test if word is correct
+      hangmanGame.guess('b');
+      //display 10 points if correct
+      expect(hangmanGame.score, 10);
+    });
+    test('If word is incorrect, give -5 points', () {
+      //Word to start game and test
+      String word = 'banana';
+
+      final hangmanGame = HangmanGame(word);
+      //test if word is incorrect
+      hangmanGame.guess('z');
+      //display -5 points if incorrect
+      expect(hangmanGame.score, -5);
+    });
+    test('test multiple correct guesses', () {
+      //Word to start game and test
+      String word = 'game';
+
+      final hangmanGame = HangmanGame(word);
+      //test if word is correct multiple times
+      hangmanGame.guess('g');
+      hangmanGame.guess('e');
+      //display 20 points if correct
+      expect(hangmanGame.score, 20);
+    });
+    test('Test multiple incorrect guesses', () {
+      //Word to start game and test
+      String word = 'game';
+
+      final hangmanGame = HangmanGame(word);
+      //test if letters are incorrect
+      hangmanGame.guess('b');
+      hangmanGame.guess('z');
+      //display -10 points for both incorrect guesses
+      expect(hangmanGame.score, -10);
+    });
+    test('Test if multiple guesses are correct and incorrect', () {
+      //Word to start game and test
+      String word = 'gamers';
+
+      final hangmanGame = HangmanGame(word);
+      //consecutive test, 2 correct, 1 incorrect
+      hangmanGame.guess('g');
+      hangmanGame.guess('a');
+      hangmanGame.guess('i');
+      //display 15 points, 20 for the correct, and -5 for the incorrect
+      expect(hangmanGame.score, 15);
+    });
+    test('Test if there is more than 1 letter of the guessed letter', () {
+      //Word to start game and test
+      String word = 'bananas';
+
+      final hangmanGame = HangmanGame(word);
+      //test if letter is correct 
+      hangmanGame.guess('a');
+      //display 30 points for word having 3 'a's
+      expect(hangmanGame.score, 30);
+    });
+  });
 }

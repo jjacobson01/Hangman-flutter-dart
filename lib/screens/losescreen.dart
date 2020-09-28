@@ -38,7 +38,16 @@ class LoseScreen extends StatelessWidget {
                         fontSize: 25,
                         color: Color(0xff84a9ac))),
                 Padding(
-                  padding: EdgeInsets.fromLTRB(0, 0, 0, 50),
+                  padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(0, 13, 0, 13),
+                  child: Text("Score: ${game.score}",
+                      key: Key('Losesscore-text'),
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontFamily: "DroidSans",
+                          color: Color(0xff84a9ac))),
                 ),
                 RaisedButton(
                     color: Color(0xff84a9ac),
