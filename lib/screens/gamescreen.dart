@@ -31,7 +31,6 @@ class _GameScreenState extends State<GameScreen> {
           child: Center(
             child: ListView(
               children: <Widget>[
-                
                 Padding(
                     padding: EdgeInsets.fromLTRB(0, 13, 0, 13),
                     child: Center(
@@ -52,6 +51,15 @@ class _GameScreenState extends State<GameScreen> {
                           color: Color(0xff84a9ac))),
                 ),
                 Padding(
+                  padding: const EdgeInsets.fromLTRB(8, 20, 8, 20),
+                  child: Text("Score: ${widget.game.score}",
+                      key: Key('score-text'),
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontFamily: "DroidSans",
+                          color: Color(0xff84a9ac))),
+                ),
+                Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Center(
                     child: Text(widget.game.blanksWithCorrectGuesses,
@@ -66,7 +74,7 @@ class _GameScreenState extends State<GameScreen> {
                 ),
                 Row(
                   children: <Widget>[
-                     Expanded(
+                    Expanded(
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(20, 8, 20, 8),
                         child: TextField(
@@ -127,7 +135,7 @@ class _GameScreenState extends State<GameScreen> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => WinScreen()));
+                                        builder: (context) => WinScreen(widget.game)));
                               }
 
                               //If the user has lost the game, renavigate them to the lose screen
@@ -145,7 +153,6 @@ class _GameScreenState extends State<GameScreen> {
                             }
                           });
                         }),
-                   
                   ],
                 ),
               ],
@@ -153,7 +160,6 @@ class _GameScreenState extends State<GameScreen> {
           ),
         ),
       ),
-      
     );
   }
 }
